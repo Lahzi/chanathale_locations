@@ -1,0 +1,11 @@
+name: chanathale/sub-category
+table: tx_chanathale_subcategory
+prefixFields: false
+labelField: title
+security:
+  ignorePageTypeRestriction: true
+fields:
+  -
+    identifier: title
+    type: Text
+    label: Title

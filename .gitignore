@@ -1,0 +1,17 @@
+./build/*
+var
+var/
+var/*
+vendor
+vendor/
+vendor/*
+.ddev
+.DS_Store
+node_modules
+npm-debug.log
+yarn-error.log
+.env
+
+!./ddev/config.yaml
+!./ddev/docker-compose.environment.yaml
+!./ddev/docker-compose.phpmyadmin.yaml

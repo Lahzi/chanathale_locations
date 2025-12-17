@@ -1,0 +1,41 @@
+name: chanathale/location
+table: tx_chanathale_location
+prefixFields: false
+labelField: title
+security:
+  ignorePageTypeRestriction: true
+fields:
+  -
+    identifier: title
+    type: Text
+    label: Title
+  -
+    identifier: address
+    type: Text
+    label: Address
+    description: 'Straße, Hausnummer, PLZ, Ort'
+  -
+    identifier: category
+    type: Select
+    label: Kategorie
+    foreign_table: tx_chanathale_category
+    foreign_table_where: 'AND tx_chanathale_category.deleted = 0 AND tx_chanathale_category.hidden = 0 ORDER BY tx_chanathale_category.title ASC'
+    renderType: selectSingle
+  -
+    identifier: sub_categories
+    type: Select
+    label: Unterkategorie:n
+    foreign_table: tx_chanathale_subcategory
+    foreign_table_where: 'AND tx_chanathale_subcategory.deleted = 0 AND tx_chanathale_subcategory.hidden = 0 ORDER BY tx_chanathale_subcategory.title ASC'
+    renderType: selectMultipleSideBySide
+    items:
+  -
+    identifier: latitude
+    type: Text
+    label: Breitengrad
+    description: 'Beispiel: 48.2082'
+  -
+    identifier: longitude
+    type: Text
+    label: Längengrad
+    description: 'Beispiel: 16.3738'

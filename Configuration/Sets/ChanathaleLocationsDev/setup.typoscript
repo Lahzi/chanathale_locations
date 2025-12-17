@@ -1,0 +1,45 @@
+config.contentObjectExceptionHandler = 0
+
+page = PAGE
+page {
+    10 = FLUIDTEMPLATE
+    10 {
+
+        layoutRootPaths {
+            100 = EXT:chanathale_locations/Resources/Private/Layouts/Dev/Page/
+        }
+
+        partialRootPaths {
+            100 = EXT:chanathale_locations/Resources/Private/Partials/Dev/Page/
+        }
+
+        file {
+            cObject = CASE
+            cObject {
+                key {
+                    field = backend_layout
+                    ifEmpty {
+                        data = levelfield:-2,backend_layout_next_level,slide
+                    }
+                }
+
+                default = TEXT
+                default {
+                    value = EXT:chanathale_locations/Resources/Private/Templates/Dev/Page/Default.html
+                }
+
+            }
+        }
+
+        variables {
+
+            content < styles.content.get
+            content {
+                select {
+                    where = colPos = 0
+                }
+            }
+        }
+    }
+    typeNum = 0
+}

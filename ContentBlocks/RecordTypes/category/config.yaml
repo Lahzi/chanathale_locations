@@ -1,0 +1,24 @@
+name: chanathale/category
+table: tx_chanathale_category
+prefixFields: false
+labelField: title
+security:
+  ignorePageTypeRestriction: true
+fields:
+  -
+    identifier: title
+    type: Text
+    label: Title
+  -
+    identifier: description
+    type: Textarea
+    label: Beschreibung
+    description: 'Kurze Beschreibung der Kategorie'
+  -
+    identifier: subcategories
+    type: Select
+    label: Unterkategorien
+    foreign_table: tx_chanathale_subcategory
+    foreign_table_where: 'AND tx_chanathale_subcategory.deleted = 0 AND tx_chanathale_subcategory.hidden = 0 ORDER BY tx_chanathale_subcategory.title ASC'
+    renderType: selectMultipleSideBySide
+    items:
