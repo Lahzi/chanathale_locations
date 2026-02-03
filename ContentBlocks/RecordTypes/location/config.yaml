@@ -39,3 +39,7 @@ fields:
     type: Text
     label: Längengrad
     description: 'Beispiel: 16.3738'
+  - identifier: coordinates
+    type: GoogleMap
+    label: Karte
+    description: 'Wählen Sie den Standort auf der Karte aus oder geben Sie die Koordinaten manuell ein.'
