@@ -1,9 +1,0 @@
-version: '3.6'
-
-services:
-  web:
-    environment:
-      - TYPO3__DB__Connections__Default__dbname=db
-      - TYPO3__DB__Connections__Default__host=db
-      - TYPO3__DB__Connections__Default__password=db
-      - TYPO3__DB__Connections__Default__user=db

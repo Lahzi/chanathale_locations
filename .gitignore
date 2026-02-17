@@ -15,3 +15,5 @@ yarn-error.log
 !./ddev/config.yaml
 !./ddev/docker-compose.environment.yaml
 !./ddev/docker-compose.phpmyadmin.yaml
+.idea/
+.idea/*
