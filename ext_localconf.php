@@ -8,4 +8,10 @@ call_user_func(function ($extKey) {
         'priority' => 40,
         'class' => \Chanathale\ChanathaleLocations\Form\Element\GoogleMapFieldElement::class,
     ];
+
+    $GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['nodeRegistry'][1770126526] = [
+        'nodeName' => 'coordinate',
+        'priority' => 40,
+        'class' => \Chanathale\ChanathaleLocations\Form\Element\CoordinateFieldElement::class,
+    ];
 }, 'chanathale_locations');

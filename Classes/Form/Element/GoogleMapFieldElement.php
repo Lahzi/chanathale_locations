@@ -42,10 +42,21 @@ class GoogleMapFieldElement extends AbstractFormElement
         $autoSuggestionId = StringUtility::getUniqueId('formengine-googlemap-autosuggestion-');
         $fieldName = $parameterArray['itemFormElName'];
 
+        $latitude = "";
+        $longitude = "";
+
+        if (isset($this->data['databaseRow']['latitude'])) {
+            $latitude = $this->data['databaseRow']['latitude'];
+        }
+
+        if (isset($this->data['databaseRow']['longitude'])) {
+            $longitude = $this->data['databaseRow']['longitude'];
+        }
+
         $html = [];
         $html[] = '<div class="form-control-wrap">';
         $html[] = '<input type="hidden" id="' . $fieldId . '" name="' . $fieldName . '" value="' . htmlspecialchars($itemValue) . '" />';
-        $html[] = '<typo3-google-maps-container data-api-key="" id="map-' . $fieldId . '" style="height: 600px; display: block">';
+        $html[] = '<typo3-google-maps-container data-latitude="'.$latitude.'" data-longitude="'.$longitude.'" data-api-key="" id="map-' . $fieldId . '" style="height: 600px; display: block">';
         $html[] = '<div class="auto-suggestion-wrapper"><label for="'.$autoSuggestionId.'">Adressensuche</label><input id="'.$autoSuggestionId.'" type="text" data-selector="suggestionField" class="form-control" /></div>';
         $html[] = '<typo3-google-maps class="map-placeholder" style="height: 100%">Loading map...</typo3-google-maps>';
         $html[] = '</typo3-google-maps-container>';
