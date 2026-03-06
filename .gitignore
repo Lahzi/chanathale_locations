@@ -17,3 +17,5 @@ yarn-error.log
 !./ddev/docker-compose.phpmyadmin.yaml
 .idea/
 .idea/*
+.node_modules/
+.node_modules/*

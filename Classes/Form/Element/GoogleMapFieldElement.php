@@ -45,13 +45,14 @@ class GoogleMapFieldElement extends AbstractFormElement
         $html = [];
         $html[] = '<div class="form-control-wrap">';
         $html[] = '<input type="hidden" id="' . $fieldId . '" name="' . $fieldName . '" value="' . htmlspecialchars($itemValue) . '" />';
-        $html[] = '<typo3-google-maps-container id="map-' . $fieldId . '" style="height: 600px; display: block">';
-        $html[] = '<div class="auto-suggestion-wrapper"><label for="'.$autoSuggestionId.'">Adressensuche</label><input id="'.$autoSuggestionId.'" type="text" class="form-control" /></div>';
+        $html[] = '<typo3-google-maps-container data-api-key="" id="map-' . $fieldId . '" style="height: 600px; display: block">';
+        $html[] = '<div class="auto-suggestion-wrapper"><label for="'.$autoSuggestionId.'">Adressensuche</label><input id="'.$autoSuggestionId.'" type="text" data-selector="suggestionField" class="form-control" /></div>';
         $html[] = '<typo3-google-maps class="map-placeholder" style="height: 100%">Loading map...</typo3-google-maps>';
         $html[] = '</typo3-google-maps-container>';
         $html[] = '</div>';
 
         $resultArray['html'] = implode(LF, $html);
+        $resultArray['stylesheetFiles'][] = 'EXT:chanathale_locations/Resources/Public/Css/backend.css';
         $resultArray['javaScriptModules'][] = JavaScriptModuleInstruction::create('@chanathale/chanathale-locations/google-map-field-type.js');
 
         return $resultArray;

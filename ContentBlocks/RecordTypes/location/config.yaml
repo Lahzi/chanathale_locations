@@ -31,14 +31,22 @@ fields:
     items:
   -
     identifier: latitude
-    type: Text
+    type: Number
+    format: decimal
     label: Breitengrad
     description: 'Beispiel: 48.2082'
+    fieldConfiguration:
+      scale: 15
+      precision: 20
   -
     identifier: longitude
-    type: Text
+    type: Number
+    format: decimal
     label: Längengrad
     description: 'Beispiel: 16.3738'
+    fieldConfiguration:
+      scale: 15
+      precision: 20
   - identifier: coordinates
     type: GoogleMap
     label: Karte
