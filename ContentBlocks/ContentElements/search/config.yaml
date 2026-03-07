@@ -7,3 +7,10 @@ fields:
   -
     identifier: header
     useExistingField: true
+  -
+    identifier: category
+    type: Select
+    label: Kategorie
+    foreign_table: tx_chanathale_category
+    foreign_table_where: 'AND tx_chanathale_category.deleted = 0 AND tx_chanathale_category.hidden = 0 ORDER BY tx_chanathale_category.title ASC'
+    renderType: selectSingle

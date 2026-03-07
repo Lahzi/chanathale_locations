@@ -1,5 +1,129 @@
 <html data-namespace-typo3-fluid="true" lang="en"
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers">
-<f:debug>{_all}</f:debug>
+<f:asset.css identifier="pin-search" href="EXT:chanathale_locations/Resources/Public/Css/pin-search.css"/>
+<f:form objectName="filter" object="{filter}">
+    <div class="grid">
+        <div class="g-col-12">
+            <div class="p-3">
+                <div class="grid gap-3">
+                    <div class="g-col-12 g-col-lg-4">
+                        <div class="form-group">
+                            <label class="form-label" for="{data.CType}-adress-{data.uid}">Adresse, Stadt, oder PLZ eingeben...</label>
+                            <f:form.textfield property="input" type="text" class="form-control" id="{data.CType}-adress-{data.uid}" />
+                        </div>
+                    </div>
+                    <div class="g-col-12 g-col-lg-3">
+                        <div class="form-group">
+                            <label class="form-label" for="{data.CType}-radius-{data.uid}">Umkreis</label>
+                            <f:form.select property="radius" class="form-select" id="{data.CType}-radius-{data.uid}">
+                                <f:for each="{data.chanathale_search_category.radius}" as="radiusOption">
+                                    <f:form.select.option value="{radiusOption.uid}">{radiusOption.title}</f:form.select.option>
+                                </f:for>
+                            </f:form.select>
+                        </div>
+                    </div>
+                    <div class="g-col-12 g-col-lg-3">
+                        <div class="form-group">
+                        <label class="form-label" for="{data.CType}-subcategories-{data.uid}">Kategorie:n</label>
+                        <f:form.select property="subcategories" multiple="1" class="form-select" id="{data.CType}-subcategories-{data.uid}">
+                            <f:for each="{data.chanathale_search_category.subcategories}" as="subcategory">
+                                <f:form.select.option value="{subcategory.uid}">{subcategory.title}</f:form.select.option>
+                            </f:for>
+                        </f:form.select>
+                        </div>
+                    </div>
+                    <div class="g-col-12 g-col-lg-2">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary w-100">Suchen</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="g-col-12 g-col-lg-4">
+            <div class="result-list" data-selector="result-list">
+                <div class="d-flex justify-content-between align-items-center py-3 ps-3">
+                    <div><span>9 Standorte gefunden</span></div>
+                    <div>
+                        <div class="form-group">
+                            <f:form.select property="sortBy" additionalAttributes="{aria-label: 'Sortierung nach: '}" class="form-select w-auto"  id="{data.CType}-sort-{data.uid}">
+                                <f:form.select.option value="radius">Entfernung</f:form.select.option>
+                                <f:form.select.option value="title">Alphabetisch</f:form.select.option>
+                            </f:form.select>
+                        </div>
+                    </div>
+                </div>
+                <div class="location-container ps-3">
+                    <div class="loc-card my-3" id="card-1" onclick="selectLocation(1)">
+                        <div class="loc-card-top">
+                            <div class="loc-icon"><i class="bi bi-shop"></i></div>
+                            <div class="loc-card-body">
+                                <div class="loc-name">Filiale Mitte</div>
+                                <div class="loc-address"><i class="bi bi-geo text-muted me-1"></i>Karl-Marx-Allee 12, 10178 Berlin</div>
+                            </div>
+                            <div class="loc-dist"><i class="bi bi-arrows-expand-vertical me-1"></i>1.2 km</div>
+                        </div>
+                        <div class="loc-tags">
+                            <span class="loc-tag">Filiale</span>
+                            <span class="loc-tag"><i class="bi bi-star-fill text-warning me-1" style="font-size:.7rem"></i>4.8</span>
+                            <span class="loc-tag"><i class="bi bi-telephone me-1"></i>030 111 222</span>
+                            <span class="loc-tag"><i class="bi bi-calendar-week me-1"></i>Sa–So</span>
+                        </div>
+                        <div class="loc-meta">
+                            <span class="open-badge open">● Geöffnet</span>
+                            <span><i class="bi bi-info-circle"></i> Details</span>
+                            <span><i class="bi bi-arrow-right-short"></i> Route</span>
+                        </div>
+                    </div>
+                    <div class="loc-card my-3" id="card-2" onclick="selectLocation(2)">
+                        <div class="loc-card-top">
+                            <div class="loc-icon"><i class="bi bi-shop"></i></div>
+                            <div class="loc-card-body">
+                                <div class="loc-name">Filiale Mitte</div>
+                                <div class="loc-address"><i class="bi bi-geo text-muted me-1"></i>Karl-Marx-Allee 12, 10178 Berlin</div>
+                            </div>
+                            <div class="loc-dist"><i class="bi bi-arrows-expand-vertical me-1"></i>1.2 km</div>
+                        </div>
+                        <div class="loc-tags">
+                            <span class="loc-tag">Filiale</span>
+                            <span class="loc-tag"><i class="bi bi-star-fill text-warning me-1" style="font-size:.7rem"></i>4.8</span>
+                            <span class="loc-tag"><i class="bi bi-telephone me-1"></i>030 111 222</span>
+                            <span class="loc-tag"><i class="bi bi-calendar-week me-1"></i>Sa–So</span>
+                        </div>
+                        <div class="loc-meta">
+                            <span class="open-badge open">● Geöffnet</span>
+                            <span><i class="bi bi-info-circle"></i> Details</span>
+                            <span><i class="bi bi-arrow-right-short"></i> Route</span>
+                        </div>
+                    </div>
+                    <div class="loc-card my-3" id="card-3" onclick="selectLocation(3)">
+                        <div class="loc-card-top">
+                            <div class="loc-icon"><i class="bi bi-shop"></i></div>
+                            <div class="loc-card-body">
+                                <div class="loc-name">Filiale Mitte</div>
+                                <div class="loc-address"><i class="bi bi-geo text-muted me-1"></i>Karl-Marx-Allee 12, 10178 Berlin</div>
+                            </div>
+                            <div class="loc-dist"><i class="bi bi-arrows-expand-vertical me-1"></i>1.2 km</div>
+                        </div>
+                        <div class="loc-tags">
+                            <span class="loc-tag">Filiale</span>
+                            <span class="loc-tag"><i class="bi bi-star-fill text-warning me-1" style="font-size:.7rem"></i>4.8</span>
+                            <span class="loc-tag"><i class="bi bi-telephone me-1"></i>030 111 222</span>
+                            <span class="loc-tag"><i class="bi bi-calendar-week me-1"></i>Sa–So</span>
+                        </div>
+                        <div class="loc-meta">
+                            <span class="open-badge open">● Geöffnet</span>
+                            <span><i class="bi bi-info-circle"></i> Details</span>
+                            <span><i class="bi bi-arrow-right-short"></i> Route</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="g-col-12 g-col-lg-8">
+            <div class="gmap" data-selector="gmap" style="height: 400px"></div>
+        </div>
+    </div>
+</f:form>
 </html>

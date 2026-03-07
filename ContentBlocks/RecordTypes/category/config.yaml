@@ -22,3 +22,11 @@ fields:
     foreign_table_where: 'AND tx_chanathale_subcategory.deleted = 0 AND tx_chanathale_subcategory.hidden = 0 ORDER BY tx_chanathale_subcategory.title ASC'
     renderType: selectMultipleSideBySide
     items:
+  -
+    identifier: radius
+    type: Select
+    label: Radien
+    foreign_table: tx_chanathale_radius
+    foreign_table_where: 'AND tx_chanathale_radius.deleted = 0 AND tx_chanathale_radius.hidden = 0 ORDER BY tx_chanathale_radius.radius ASC'
+    renderType: selectMultipleSideBySide
+    items:

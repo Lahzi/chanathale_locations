@@ -18,6 +18,9 @@ declare(strict_types=1);
 
 namespace Chanathale\ChanathaleLocations\Controller;
 
+use Chanathale\ChanathaleLocations\Domain\Model\Category;
+use Chanathale\ChanathaleLocations\Domain\Model\Filter;
+use Chanathale\ChanathaleLocations\Domain\Repository\CategoryRepository;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
@@ -27,7 +30,7 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
  */
 class LocationController extends ActionController
 {
-    public function __construct() {
+    public function __construct(private CategoryRepository $categoryRepository) {
     }
 
     /**
@@ -37,9 +40,18 @@ class LocationController extends ActionController
     public function searchAction () : ResponseInterface {
         /** @var ContentObjectRenderer $contentObject */
         $contentObject = $this->request->getAttribute('currentContentObject');
-        $dataFromTypoScript = $contentObject->data;
+        $data = $contentObject->data;
 
-        $this->view->assign('data', $dataFromTypoScript);
+        $categoryUid = $data['chanathale_search_category'] ?? 0;
+        $category = $this->categoryRepository->findByUid($categoryUid);
+        if ($category instanceof Category) {
+            $data['chanathale_search_category'] = $category;
+        }
+
+        $filter = new Filter();
+
+        $this->view->assign('data', $data);
+        $this->view->assign('filter', $filter);
 
         return $this->htmlResponse();
     }
