@@ -1,0 +1,13 @@
+tt_content.chanathale_chanathalelocations_search.20 = EXTBASEPLUGIN
+tt_content.chanathale_chanathalelocations_search.20 {
+    extensionName = ChanathaleLocations
+    pluginName = pinsearch
+    # If your controller returns a HTML response, set the template path like this:
+    view {
+        templateRootPaths.0 = EXT:chanathale_locations/ContentBlocks/ContentElements/search/templates
+    }
+}
+
+config {
+    contentObjectExceptionHandler = 0
+}

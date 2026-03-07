@@ -1,0 +1,8 @@
+categories:
+  chanathalelocations: ~
+
+settings:
+  chanathalelocations.googleApiKey:
+    default: ''
+    type: string
+    category: chanathalelocations

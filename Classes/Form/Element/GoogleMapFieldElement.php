@@ -20,7 +20,10 @@ declare(strict_types=1);
 namespace Chanathale\ChanathaleLocations\Form\Element;
 
 use TYPO3\CMS\Backend\Form\Element\AbstractFormElement;
+use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Page\JavaScriptModuleInstruction;
+use TYPO3\CMS\Core\Site\SiteFinder;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\StringUtility;
 
 /**
@@ -35,12 +38,16 @@ class GoogleMapFieldElement extends AbstractFormElement
      */
     public function render(): array
     {
+        $siteFinder = GeneralUtility::makeInstance(SiteFinder::class);
+        $site = $siteFinder->getSiteByPageId($this->data['effectivePid']);
+
         $resultArray = $this->initializeResultArray();
         $parameterArray = $this->data['parameterArray'];
         $itemValue = $parameterArray['itemFormElValue'];
         $fieldId = StringUtility::getUniqueId('formengine-googlemap-');
         $autoSuggestionId = StringUtility::getUniqueId('formengine-googlemap-autosuggestion-');
         $fieldName = $parameterArray['itemFormElName'];
+        $apiKey = $site->getConfiguration()['settings']['chanathalelocations']['googleApiKey'] ?? '';
 
         $latitude = "";
         $longitude = "";
@@ -56,15 +63,15 @@ class GoogleMapFieldElement extends AbstractFormElement
         $html = [];
         $html[] = '<div class="form-control-wrap">';
         $html[] = '<input type="hidden" id="' . $fieldId . '" name="' . $fieldName . '" value="' . htmlspecialchars($itemValue) . '" />';
-        $html[] = '<typo3-google-maps-container data-latitude="'.$latitude.'" data-longitude="'.$longitude.'" data-api-key="" id="map-' . $fieldId . '" style="height: 600px; display: block">';
-        $html[] = '<div class="auto-suggestion-wrapper"><label for="'.$autoSuggestionId.'">Adressensuche</label><input id="'.$autoSuggestionId.'" type="text" data-selector="suggestionField" class="form-control" /></div>';
+        $html[] = '<typo3-google-maps-container data-latitude="'.$latitude.'" data-longitude="'.$longitude.'" data-api-key="'.$apiKey.'" id="map-' . $fieldId . '" style="height: 600px; display: block">';
+        $html[] = '<div class="auto-suggestion-wrapper"><label for="'.$autoSuggestionId.'">Adressensuche</label><input id="'.$autoSuggestionId.'" type="text" data-selector="suggestionField" class="form-control gmp-place-autocomplete" /></div>';
         $html[] = '<typo3-google-maps class="map-placeholder" style="height: 100%">Loading map...</typo3-google-maps>';
         $html[] = '</typo3-google-maps-container>';
         $html[] = '</div>';
 
         $resultArray['html'] = implode(LF, $html);
         $resultArray['stylesheetFiles'][] = 'EXT:chanathale_locations/Resources/Public/Css/backend.css';
-        $resultArray['javaScriptModules'][] = JavaScriptModuleInstruction::create('@chanathale/chanathale-locations/google-map-field-type.js');
+        $resultArray['javaScriptModules'][] = JavaScriptModuleInstruction::create('@chanathale/search/google-map-field-type.js');
 
         return $resultArray;
     }

@@ -1,0 +1,9 @@
+name: chanathale/search
+typeName: chanathale_chanathalelocations_search
+group: default
+prefixFields: true
+prefixType: full
+fields:
+  -
+    identifier: header
+    useExistingField: true

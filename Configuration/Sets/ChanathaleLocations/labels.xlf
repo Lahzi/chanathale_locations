@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" datatype="plaintext" original="EXT:chanathale_locations/Configuration/Sets/ChanathaleLocations/labels.xlf" date="2026-03-03T08:00:00Z" product-name="chanathale_locations">
+    <header/>
+    <body>
+      <trans-unit id="label">
+        <source>Chanathale Locations</source>
+      </trans-unit>
+      <trans-unit id="categories.chanathalelocations">
+        <source>Chanathale Locations</source>
+      </trans-unit>
+      <trans-unit id="settings.chanathalelocations.googleApiKey">
+        <source>Google Map JavaScript API-Key</source>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
