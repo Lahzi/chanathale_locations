@@ -61,6 +61,11 @@ class Filter extends AbstractEntity
      */
     protected string $sortDirection = 'asc';
 
+    /**
+     * @var int $contentElementUid
+     */
+    protected int $contentElementUid = 0;
+
     public function __construct() {
         $this->subcategories = new ObjectStorage();
     }
@@ -119,5 +124,13 @@ class Filter extends AbstractEntity
 
     public function setSortDirection(string $sortDirection): void {
         $this->sortDirection = $sortDirection;
+    }
+
+    public function getContentElementUid(): int {
+        return $this->contentElementUid;
+    }
+
+    public function setContentElementUid(int $contentElementUid): void {
+        $this->contentElementUid = $contentElementUid;
     }
 }

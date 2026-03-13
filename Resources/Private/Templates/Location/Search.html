@@ -2,15 +2,17 @@
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers">
 <f:asset.css identifier="pin-search" href="EXT:chanathale_locations/Resources/Public/Css/pin-search.css"/>
-<f:form objectName="filter" object="{filter}">
+<f:asset.script identifier="location-search" src="EXT:chanathale_locations/Resources/Public/JavaScript/location-search.js"/>
+
+<f:form objectName="filter" id="pin-search-{data.uid}" object="{filter}" additionalAttributes="{data-location-search: '1', data-api-key: apiKey, data-result-set: resultSet}">
     <div class="grid">
         <div class="g-col-12">
-            <div class="p-3">
+            <div class="pt-3 px-3">
                 <div class="grid gap-3">
                     <div class="g-col-12 g-col-lg-4">
                         <div class="form-group">
                             <label class="form-label" for="{data.CType}-adress-{data.uid}">Adresse, Stadt, oder PLZ eingeben...</label>
-                            <f:form.textfield property="input" type="text" class="form-control" id="{data.CType}-adress-{data.uid}" />
+                            <f:form.textfield additionalAttributes="{data-selector: 'suggestionField'}" property="input" type="text" class="form-control" id="{data.CType}-adress-{data.uid}" />
                         </div>
                     </div>
                     <div class="g-col-12 g-col-lg-3">
@@ -54,7 +56,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="location-container ps-3">
+                <div class="location-container ps-3 pe-3 pe-lg-0">
                     <div class="loc-card my-3" id="card-1" onclick="selectLocation(1)">
                         <div class="loc-card-top">
                             <div class="loc-icon"><i class="bi bi-shop"></i></div>
@@ -122,8 +124,10 @@
             </div>
         </div>
         <div class="g-col-12 g-col-lg-8">
-            <div class="gmap" data-selector="gmap" style="height: 400px"></div>
+            <div class="gmap" data-selector="map" style="height: 100%"></div>
         </div>
     </div>
+
+    <f:form.hidden property="contentElementUid" value="{data.uid}" />
 </f:form>
 </html>
